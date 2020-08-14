@@ -1,35 +1,19 @@
-import React, { Component } from "react";
-import "./App.css";
-import Navbar from "./components/navbar"
-import Jumbotron from "./components/Jumbotron";
-import FormSearchBook from "./components/Form"
-import ResultCard from "./components/ResultCard"
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./Pages/Home.js"
+
 
 function App() {
   return (
-   //Start adding elements here
-   <div>
-     <Navbar />
-     <br />
-     <div className="container">
-     <Jumbotron />
-     <FormSearchBook />
-     <br />
-       <h2>Results!</h2>
-       <div>
-         <ResultCard />
-       </div>
-
-
-     </div>
-     
-     
-   
-
-
-
-   </div>
-   
+<h1>hello</h1>
+    // <Router>
+    //   <div>
+    //       <Switch>
+    //         <Route exact path="/" component={Home} />
+    //         {/* <Route component={NoMatch} /> */}
+    //       </Switch>
+    //   </div>
+    // </Router>
 
   );
 }
