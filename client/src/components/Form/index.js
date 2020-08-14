@@ -11,6 +11,8 @@ function FormSearchBook() {
           <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
         </div>
       </form>
+
+      <button type="submit" class="btn btn-primary">Search</button>
     </div>
 
 
