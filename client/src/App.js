@@ -10,6 +10,7 @@ function App() {
    //Start adding elements here
    <div>
      <Navbar />
+     <br />
      <div className="container">
      <Jumbotron />
      <FormSearchBook />
