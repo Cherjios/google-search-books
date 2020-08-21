@@ -13,8 +13,8 @@ router
 
     
 router
-    .route("/google")
-    .get(booksControllers.googleBooks);
+    .route("/api/google")
+    .get(booksControllers.googleBooks); 
 
 module.exports = router;
 

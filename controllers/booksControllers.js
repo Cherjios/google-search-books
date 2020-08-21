@@ -21,10 +21,18 @@ module.exports = {
         .catch(err => res.status(422).json(err));
     },
     googleBooks:function(req,res){
-        bookName = req.body
-        axios.get("https://www.googleapis.com/books/v1/volumes?q="+bookName)
+        const bookName = req.params
+        axios.get("https://www.googleapis.com/books/v1/volumes",{bookName} )
         .then(function(res) {
-          console.log(res.data);
+            res.data.items.filter(book=> 
+            book.volumeInfo.title &&
+            book.volumeInfo.authors &&
+            book.volumeInfo.description &&
+            book.volumeInfo.imageLinks.smallThumbnail &&
+            book.volumeInfo.infoLink
+          )
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err))
         });
     }
 };
