@@ -9,7 +9,7 @@ router
 
 router
     .route("/api/books/:id")
-    .delete(books.booksControllers.remove);
+    .delete(booksControllers.remove);
 
     
 router
