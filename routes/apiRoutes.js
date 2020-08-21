@@ -1,11 +1,20 @@
-const axios = require("axios");
+
 const router = require("express").Router();
+const booksControllers = require("../controllers/booksControllers")
 
 router
     .route("/api/books")
+    .get(booksControllers.findAll)
+    .post(booksControllers.create);
+
+router
+    .route("/api/books/:id")
+    .delete(books.booksControllers.remove);
+
     
-
-
+router
+    .route("/google")
+    .get(booksControllers.googleBooks);
 
 module.exports = router;
 
