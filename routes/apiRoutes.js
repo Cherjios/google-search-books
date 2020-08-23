@@ -1,4 +1,3 @@
-
 const router = require("express").Router();
 const booksControllers = require("../controllers/booksControllers")
 
@@ -11,10 +10,27 @@ router
     .route("/api/books/:id")
     .delete(booksControllers.remove);
 
-    
+
 router
     .route("/api/google")
-    .get(booksControllers.googleBooks); 
+    .get(booksControllers.googleBooks);
+
+router.get("/google/:name", (req, res) => {
+    // make an api call to `https://www.googleapis.com/books/v1/volumes?q=<Book Name>` and return the relevant results.
+
+    console.log("Looking for: " + req.params.name);
+
+
+    axios.get("https://www.googleapis.com/books/v1/volumes",
+        { params: { q: req.params.name } }).then(({ data }) => {
+
+            console.log(data.items);
+
+            res.json(data.items);
+        })
+        .catch(err => res.status(422).json(err));
+});
+
 
 module.exports = router;
 
