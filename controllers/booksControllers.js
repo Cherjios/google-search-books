@@ -19,5 +19,20 @@ module.exports = {
         .then(dbModel => dbModel.remove())
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
+    },
+    googleBooks:function(req,res){
+        const {query:params} = req
+        axios.get("https://www.googleapis.com/books/v1/volumes",{params} )
+        .then(function(results) {
+            results.data.items.filter(book=> 
+            book.volumeInfo.title &&
+            book.volumeInfo.authors &&
+            book.volumeInfo.description &&
+            book.volumeInfo.imageLinks.smallThumbnail &&
+            book.volumeInfo.infoLink
+          ).then()
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err))
+        });
     }
 };

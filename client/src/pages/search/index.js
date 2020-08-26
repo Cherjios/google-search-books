@@ -9,24 +9,27 @@ class Search extends Component {
 
     state = {
         book: [],
-        bookSearch: ""
+        q: ""
       };
 
       handleInputChange = event => {
-        // Destructure the name and value properties off of event.target
+        // structure the name and value properties off of event.target
         // Update the appropriate state
         const { name, value } = event.target;
         this.setState({
           [name]: value  //Ask for this line??
         });
+        console.log(this.state.q);
       };
       
       handleFormSubmit = event => {
         // When the form is submitted, prevent its default behavior, get recipes update the recipes state
         event.preventDefault();
-        API.getBooks(this.state.bookSearch)
-          .then(res => this.setState({ book: res.data }))
+        console.log(this.state.q)
+        API.getBooks(this.state.q)
+          .then(res =>  this.setState({ book: res.data }))
           .catch(err => console.log(err));
+          console.log(this.state.book);
       };
 
 
@@ -38,7 +41,7 @@ render(){
             <div className="form-group">
                 <h1> Search a book!</h1>
                 <label htmlFor="searchBook">Book</label>
-                <input type="text" className="form-control" name="bookSearch" value={this.state.bookSearch} onChange={this.handleInputChange} />
+                <input type="text" className="form-control" name="q" value={this.state.q} onChange={this.handleInputChange} />
             </div>
 
             <button type="submit" className="btn btn-primary" onClick={this.handleFormSubmit}>Search!</button>
