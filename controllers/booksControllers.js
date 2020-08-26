@@ -30,7 +30,13 @@ module.exports = {
             book.volumeInfo.description &&
             book.volumeInfo.imageLinks.smallThumbnail &&
             book.volumeInfo.infoLink
-          ).then()
+          ).then(apiBooks =>
+            db.Books.find().then(dbBooks =>
+              apiBooks.filter(apiBook =>
+                dbBooks.every(dbBook => dbBook.googleId.toString() !== apiBook.id)
+              )
+            )
+          )
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err))
         });
