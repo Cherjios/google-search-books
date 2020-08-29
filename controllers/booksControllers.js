@@ -21,24 +21,24 @@ module.exports = {
         .catch(err => res.status(422).json(err));
     },
     googleBooks:function(req,res){
+      console.log("Google book search")
         const {query:params} = req
         axios.get("https://www.googleapis.com/books/v1/volumes",{params} )
-        .then(function(results) {
+        .then(results=> 
             results.data.items.filter(book=> 
             book.volumeInfo.title &&
             book.volumeInfo.authors &&
             book.volumeInfo.description &&
             book.volumeInfo.imageLinks.smallThumbnail &&
             book.volumeInfo.infoLink
-          ).then(apiBooks =>
+          )).then(apiBooks =>
             db.Books.find().then(dbBooks =>
               apiBooks.filter(apiBook =>
                 dbBooks.every(dbBook => dbBook.googleId.toString() !== apiBook.id)
               )
             )
-          )
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err))
-        });
+        );
     }
 };
